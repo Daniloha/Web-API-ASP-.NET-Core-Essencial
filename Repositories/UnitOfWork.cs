@@ -13,6 +13,11 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
     }
 
+    /*
+     * Lazy Loading -> Adia a obtenção de objetos até que eles realmente se tornem
+     * necessários.
+     */
+
     public IProdutoRepository ProdutoRepository
     {
         get
@@ -32,9 +37,9 @@ public class UnitOfWork : IUnitOfWork
             return _categoriaRepo = _categoriaRepo ?? new CategoriaRepository(_context);
         }
     }
-    public void Commit()
+    public async Task CommitAsync()
     {
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
     public void Dispose()

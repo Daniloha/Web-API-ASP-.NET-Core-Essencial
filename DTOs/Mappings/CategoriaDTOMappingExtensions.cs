@@ -2,6 +2,10 @@
 
 namespace APICatalogo.DTOs.Mappings;
 
+/*
+ *  Metodos de extensão para o mapeamento e conversão de CATEGORIAS
+ *  em CATEGORIAS DTO e vice versa.
+ */
 public static class CategoriaDTOMappingExtensions
 {
     public static CategoriaDTO? ToCategoriaDTO(this Categoria categoria)

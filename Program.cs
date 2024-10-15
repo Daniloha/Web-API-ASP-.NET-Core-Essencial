@@ -16,7 +16,7 @@ builder.Services.AddControllers(options =>
 .AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-});
+}).AddNewtonsoftJson();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -50,13 +50,36 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 /**************************************************************/
+/*TEMPOS DE VIDA DE UMA INSTÂNCIA
+ * Singleton -> Uma única instância é criada para todo o tempo de vida da aplicação
+ * Essa mesma instância é reutilizada sempre que a dependência é requisitada.
+ * Ideal para serviços que precisam compartilhar dados entre todas as requisições
+ * e que são seguros para acesso simultâneo (thread-safe).
+ * 
+ * Scoped -> Uma nova instância é criada para cada scope de requisição.
+ * Em aplicações web, um novo scope é criado a cada requisição HTTP, 
+ * ou seja, a mesma instância é compartilhada durante toda a requisição.
+ * Ideal para objetos que mantêm estado durante o processamento de uma 
+ * única requisição, mas não entre diferentes requisições.
+ * 
+ * Transient -> Cada vez que a dependência é requisitada, uma nova instância é criada.
+ * Usado para objetos que não mantêm estado e são leves, ou que precisam ser criados 
+ * sempre que requisitados.
+ * É ideal para serviços que são de curta duração e que não precisam manter estado entre
+ * as requisições.
+ * 
+/**************************************************************/
 
-//Adicionando log personalizado
+//Adicionando logs personalizados
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
     LogLevel = LogLevel.Information
 }));
 
+/*
+ * Injeta o serviço de mapeamento automático em minha API para a entidade Produto
+ * e Produto DTO.
+ */
 builder.Services.AddAutoMapper(typeof(ProdutoDTOMappingProfile));
 
 var app = builder.Build();//Instancia da aplicação WEB

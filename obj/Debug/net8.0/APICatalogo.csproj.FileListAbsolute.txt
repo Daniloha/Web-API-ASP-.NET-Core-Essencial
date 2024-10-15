@@ -733,3 +733,8 @@ C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratt
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\obj\Debug\net8.0\APICatal.C7776A93.Up2Date
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\obj\Debug\net8.0\APICatalogo.genruntimeconfig.cache
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\obj\Debug\net8.0\ref\APICatalogo.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\obj\Debug\net8.0\APICatalogo.sourcelink.json
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

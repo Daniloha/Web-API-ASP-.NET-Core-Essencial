@@ -5,6 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace APICatalogo.DTOs;
 
+/*
+ * DTO - Data Transfer Object
+ * -> Desacopla a camada de modelo de domínio da camada de apresentação, 
+ * criando uma camada isolada para a transferência de dados entre as camadas.
+ */
 public class ProdutoDTO
 {
     public int ProdutoId { get; set; }
