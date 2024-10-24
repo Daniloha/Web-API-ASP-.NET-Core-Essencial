@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "GetAsync",
+    "Method": "Get",
     "RelativePath": "Categorias",
     "HttpMethod": "GET",
     "IsController": true,
@@ -21,7 +21,7 @@
   },
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "PostAsync",
+    "Method": "Post",
     "RelativePath": "Categorias",
     "HttpMethod": "POST",
     "IsController": true,
@@ -47,39 +47,8 @@
   },
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "GetAsync",
-    "RelativePath": "Categorias/pagination",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "PageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "PageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.DTOs.CategoriaDTO, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "GetProdutosPorNomeAsync",
-    "RelativePath": "Categorias/produtosPorNome",
+    "Method": "GetCategoriasFiltradas",
+    "RelativePath": "Categorias/filter/nome/pagination",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -114,7 +83,38 @@
   },
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "GetAsync",
+    "Method": "Get",
+    "RelativePath": "Categorias/pagination",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[APICatalogo.DTOs.CategoriaDTO, APICatalogo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.CategoriasController",
+    "Method": "Get",
     "RelativePath": "Categorias/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -141,7 +141,7 @@
   },
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "PutAsync",
+    "Method": "Put",
     "RelativePath": "Categorias/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -172,7 +172,7 @@
   },
   {
     "ContainingType": "APICatalogo.Controllers.CategoriasController",
-    "Method": "DeleteAsync",
+    "Method": "Delete",
     "RelativePath": "Categorias/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -454,5 +454,106 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "AddUserToRole",
+    "RelativePath": "api/Auth/AddUserToRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "CreateRole",
+    "RelativePath": "api/Auth/CreateRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "APICatalogo.DTOs.LoginModelDTODTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Auth/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenModel",
+        "Type": "APICatalogo.DTOs.TokenModelDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "APICatalogo.DTOs.RegisterModelDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APICatalogo.Controllers.AuthController",
+    "Method": "Revoke",
+    "RelativePath": "api/Auth/revoke/{username}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

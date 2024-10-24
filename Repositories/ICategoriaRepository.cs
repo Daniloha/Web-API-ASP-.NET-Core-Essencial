@@ -2,6 +2,7 @@
 using APICatalogo.Pagination;
 using X.PagedList;
 
+
 namespace APICatalogo.Repositories;
 
 public interface ICategoriaRepository : IRepository<Categoria>

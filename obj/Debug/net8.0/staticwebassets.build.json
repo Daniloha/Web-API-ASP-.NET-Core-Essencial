@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "MeJPecLVnHOwxEPIhq4ogY4pvObvWlhWbuE7rLBo+fQ=",
+  "Hash": "Iest1w2tr7boSQ7EnrMpqMFjhHwMyMIpKXa3k8dLI5Q=",
   "Source": "APICatalogo",
   "BasePath": "_content/APICatalogo",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "APICatalogo\\wwwroot",
+      "Source": "APICatalogo",
+      "ContentRoot": "C:\\Users\\nilo_\\OneDrive\\Desktop\\Projetos\\.Net\\WebAPIASPNETCoreEssencial\\Macoratti\\APICatalogo\\wwwroot\\",
+      "BasePath": "_content/APICatalogo",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\nilo_\\OneDrive\\Desktop\\Projetos\\.Net\\WebAPIASPNETCoreEssencial\\Macoratti\\APICatalogo\\wwwroot\\swagger-ui\\SwaggerDark.cs",
+      "SourceId": "APICatalogo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\nilo_\\OneDrive\\Desktop\\Projetos\\.Net\\WebAPIASPNETCoreEssencial\\Macoratti\\APICatalogo\\wwwroot\\",
+      "BasePath": "_content/APICatalogo",
+      "RelativePath": "swagger-ui/SwaggerDark.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\swagger-ui\\SwaggerDark.cs"
+    },
+    {
+      "Identity": "C:\\Users\\nilo_\\OneDrive\\Desktop\\Projetos\\.Net\\WebAPIASPNETCoreEssencial\\Macoratti\\APICatalogo\\wwwroot\\swagger-ui\\SwaggerDark.css",
+      "SourceId": "APICatalogo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\nilo_\\OneDrive\\Desktop\\Projetos\\.Net\\WebAPIASPNETCoreEssencial\\Macoratti\\APICatalogo\\wwwroot\\",
+      "BasePath": "_content/APICatalogo",
+      "RelativePath": "swagger-ui/SwaggerDark.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\swagger-ui\\SwaggerDark.css"
+    }
+  ]
 }
