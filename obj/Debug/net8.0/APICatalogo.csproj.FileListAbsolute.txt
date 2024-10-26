@@ -756,3 +756,9 @@ C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratt
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\ApiCatalogo\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\ApiCatalogo\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\APICatalogo.staticwebassets.runtime.json
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Asp.Versioning.Http.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\bin\Debug\net8.0\APICatalogo.xml
+C:\Users\nilo_\OneDrive\Desktop\Projetos\.Net\WebAPIASPNETCoreEssencial\Macoratti\APICatalogo\obj\Debug\net8.0\APICatalogo.xml

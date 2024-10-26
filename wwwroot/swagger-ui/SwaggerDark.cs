@@ -1,4 +1,8 @@
-﻿@media only screen and (prefers-color-scheme: dark) {
+﻿/*
+	Estilo Dark-Mode para o swagger
+*/
+
+@media only screen and (prefers-color-scheme: dark) {
 
 	a {
 		color: #8c8cfa;

@@ -3,6 +3,7 @@ using APICatalogo.DTOs.Mappings;
 using APICatalogo.Models;
 using APICatalogo.Pagination;
 using APICatalogo.Repositories;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,10 @@ namespace APICatalogo.Controllers;
 
 //[EnableCors("_origensComAcessoPermitido")] //Habilita esta CORS para toda a API.
 [EnableRateLimiting("fixedwindow")]
-[Route("[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
 [ApiController]
+[Produces("application/json")]
 public class CategoriasController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
@@ -28,7 +31,10 @@ public class CategoriasController : ControllerBase
         _logger = logger;
         _uof = uof;
     }
-
+    /// <summary>
+    /// Retorna uma lista de categorias
+    /// </summary>
+    /// <returns>Todasas categorias criadas</returns>
     [HttpGet]
     [DisableRateLimiting]
     //[Authorize]
@@ -80,9 +86,15 @@ public class CategoriasController : ControllerBase
         var categoriasDto = categorias.ToCategoriaDTOList();
         return Ok(categoriasDto);
     }
-
+    /// <summary>
+    /// Obtem uma categoria especifica pelo id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns> Uma categoria</returns>
     [DisableCors]//Desabilita esta CORS para esta rota.
     [HttpGet("{id:int}", Name = "ObterCategoria")]
+    [ProducesResponseType(StatusCodes.Status200OK),
+        ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<CategoriaDTO>> Get(int id)
     {
         var categoria = await _uof.CategoriaRepository.GetAsync(c => c.CategoriaId == id);
@@ -97,8 +109,23 @@ public class CategoriasController : ControllerBase
 
         return Ok(categoriaDto);
     }
-
+    /// <summary>
+    /// Cria uma nova categoria
+    /// </summary>
+    /// <remarks>
+    /// Exemplo de request:
+    ///
+    ///     POST /Categorias
+    ///     {
+    ///         "Nome": "Nome da categoria"
+    ///         "ImagemUrl": "http://www.imagem_da_categoria.jpg"
+    ///     }
+    /// </remarks>
+    /// <param name="categoriaDto">objeto Categoria</param>
+    /// <returns>O objeto categoria criado</returns>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created),
+        ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CategoriaDTO>> Post(CategoriaDTO categoriaDto)
     {
         if (categoriaDto is null)
@@ -120,6 +147,7 @@ public class CategoriasController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [ApiConventionMethod(typeof(DefaultApiConventions),nameof(DefaultApiConventions.Put))]
     public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDto)
     {
         if (id != categoriaDto.CategoriaId)

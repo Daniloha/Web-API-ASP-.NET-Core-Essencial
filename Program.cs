@@ -1,3 +1,17 @@
+/*
+ * ************************************************************************************
+ *                              API CATALOGO
+ * ************************************************************************************
+ * Descricão: API de Catalogo de Produtos.
+ * Versão: 1.0.0
+ * Arquivo: Program.cs
+ * Autor: Danilo Holanda Araujo
+ * E-mail: danilo.h.araujo@gmail.com
+ * Repositório: https://github.com/Daniloha/Web-API-ASP-.NET-Core-Essencial
+ * 
+ * ************************************************************************************
+ */
+
 using APICatalogo.Context;
 using APICatalogo.DTOs.Mappings;
 using APICatalogo.Filters;
@@ -6,16 +20,19 @@ using APICatalogo.Models;
 using APICatalogo.RateLimitOptions;
 using APICatalogo.Repositories;
 using APICatalogo.Services;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,9 +47,12 @@ builder.Services.AddControllers(options =>
 }).AddNewtonsoftJson();
 
 /*
+ * ************************************************************************************
  * CORS - Política de compartilhamento de recursos.
+ * ************************************************************************************
  * -> Permite que minha API seja executada remotamente por outros sites
  * de origens diferentes de acordo com as regras que eu definir.
+ * ************************************************************************************
  */
 
 var OrigensComAcessoPermitido = "_origensComAcessoPermitido";//Nomeada -> AddPolicy
@@ -49,14 +69,30 @@ builder.Services.AddCors(options =>
         });
 });
 
-//Adiciona o serviço de endpoints a minha API.
+// Configuração necessária apenas para as minimal APIs.
 builder.Services.AddEndpointsApiExplorer();
 
-//Adiciona o  serviço do swagger a minha API.
+/*
+ * ************************************************************************************
+ *                          Swashbuckle.AspNetCoreSwaggerGen
+ * ************************************************************************************
+ * Gerador Swagger que cria objetos SwaggerDocument de modelos, controladore s e rotas.
+ * ************************************************************************************
+ */
+
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "apicatalogo", Version = "v1" });
-
+    c.SwaggerDoc("v1", 
+        new OpenApiInfo { Title = "Apicatalogo",
+                          Version = "v1",
+                          Description = "API referente ao curso Web API ASP .NET Core Essencial (.NET 8)\r\n",
+                          Contact = new OpenApiContact
+                          {
+                              Name = "Danilo",
+                              Email = "danilo.h.araujo@gmail.com",
+                              Url = new Uri("https://github.com/Daniloha/Web-API-ASP-.NET-Core-Essencial")
+                          }
+    });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Name = "Authorization",
@@ -67,7 +103,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Bearer JWT ",
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
+    {
                     {
                           new OpenApiSecurityScheme
                           {
@@ -79,7 +115,9 @@ builder.Services.AddSwaggerGen(c =>
                           },
                          new string[] {}
                     }
-                });
+    });
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 
@@ -187,6 +225,51 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
     });
     rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+});
+
+/*
+ * ************************************************************************************
+ *                                VERSIONAMENTO DA API
+ * ************************************************************************************
+ *
+ * -> O versionamento de software é um sistema de numeração que ajuda a identificar
+ * diferentes versões de um software ao longo do seu ciclo de desenvolvimento e
+ * distribuição. Uma das convenções mais populares para versionamento é o SemVer
+ * (Versionamento Semântico), que utiliza três números separados por pontos:
+ * MAJOR.MINOR.PATCH.
+ *
+ * MAJOR (Versão Major) -> Refere-se a mudanças significativas no software que,
+ * geralmente, resultam em incompatibilidade com versões anteriores. Incrementar
+ * a versão major indica que a nova versão possui modificações que quebram a
+ * compatibilidade com a API anterior ou introduzem mudanças fundamentais.
+ *
+ * MINOR (Versão Minor) -> Refere-se à adição de novas funcionalidades que são
+ * compatíveis com as versões anteriores, sem modificar ou quebrar a API existente.
+ * Incrementar a versão minor significa que houve uma expansão das funcionalidades
+ * do software, mas de forma que os usuários existentes não precisam mudar seus
+ * códigos para aproveitar as novidades.
+ *
+ * PATCH (Correção) -> Refere-se a correções de bugs, melhorias de segurança
+ * ou pequenos ajustes que não alteram a API ou a funcionalidade existente de
+ * forma significativa. Incrementar a versão patch significa que o software foi
+ * atualizado para corrigir erros, mantendo a compatibilidade total com a
+ * versão anterior.
+ *
+ * ************************************************************************************
+ */
+
+var temp = builder.Services.AddApiVersioning(o =>
+{
+    o.DefaultApiVersion = new ApiVersion(1, 0); //Versão padrão da API (1, 0) = 1.0
+    o.AssumeDefaultVersionWhenUnspecified = true; //Se não fornecermos outra versão, se usa a padrão.
+    o.ReportApiVersions = true; //Permite informar as versões suportadas nos headers de response.
+    o.ApiVersionReader = ApiVersionReader.Combine( //Informa como ler a versão da API.
+                          new QueryStringApiVersionReader(),//Versionamento por Query string.
+                          new UrlSegmentApiVersionReader());//Versionamento pela URL.
+}).AddApiExplorer(options => //Corrige e adapta o versionamento no swagger.
+{
+    options.GroupNameFormat = "'v'VVV"; //modelo de formatação da versão "'v'major[.minor][-status]".
+    options.SubstituteApiVersionInUrl = true;//Substitui a versão na URL no swagger.
 });
 
 
@@ -306,11 +389,20 @@ app.UseCors(OrigensComAcessoPermitido);//Não nomeada -> AddDefaultPolicy.
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())//Verificando se o ambiente é de desenvolvimento.
 {
-    app.UseSwagger();// Middleware do Swagger que fornece a documentação das API
+    /*
+     *                        Swashbuckle.AspNetCore.Swagger
+     * Middleware do Swagger que fornece os objetos SwaggerDocument como endpoints JSON.
+     */
+    app.UseSwagger();
+
+    /*
+   *                        Swashbuckle.AspNetCore.SwaggerUI
+   * Versão embutida da ferramenta de interface do usuário Swagger.
+   */
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI");
-        c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiCatalogo");//Adição de endpoints.
+        c.InjectStylesheet("/swagger-ui/SwaggerDark.css");//Implementa darkMode ao swagger.
     });// Middleware que define a interface do usuário para interagir
                        // com a API
 }
@@ -321,5 +413,7 @@ app.UseAuthorization();// Define os níveis de autorização para verificar as perm
                        // de acesso.
 
 app.MapControllers();//Mapeamento dos controladores da aplicação.
+// Mapeamento das rotas de meus endpoints.
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app.Run();// Middleware final -> Ponta da request.

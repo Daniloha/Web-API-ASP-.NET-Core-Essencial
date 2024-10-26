@@ -1,6 +1,7 @@
 ﻿using APICatalogo.DTOs;
 using APICatalogo.Models;
 using APICatalogo.Services;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -9,9 +10,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace APICatalogo.Controllers;
-
-[Route("api/[controller]")]
+/// <summary>
+/// Controlador de autenticação e autorização por Token JWT
+/// </summary>
+[Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
+[ApiVersion("1.0")]
 public class AuthController : ControllerBase
 {
     private readonly ITokenService _tokenService;
@@ -110,6 +114,12 @@ public class AuthController : ControllerBase
         return BadRequest(new { error = "Unable to find user" });
     }
 
+    /// <summary>
+    /// Verifica as credenciais do usuário.
+    /// </summary>
+    /// <param name="model">Um objeto do tipo Usuário</param>
+    /// <returns>Status 200 e o token JWT para o cliente</returns>
+    /// <remarks>Se ocorrer um erro, retorna status 500</remarks>
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModelDTODTO model)
@@ -158,6 +168,11 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
+    /// <summary>
+    /// Registra um usuário.
+    /// </summary>
+    /// <param name="model">Um objeto do tipo Usuário</param>
+    /// <returns>Status 200</returns>
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] RegisterModelDTO model)

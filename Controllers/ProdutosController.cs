@@ -2,6 +2,7 @@
 using APICatalogo.Models;
 using APICatalogo.Pagination;
 using APICatalogo.Repositories;
+using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -11,8 +12,10 @@ using Newtonsoft.Json;
 
 namespace APICatalogo.Controllers;
 
-[Route("[controller]")]// api/produtos
+[Route("api/v{version:apiVersion}/[controller]")]// Rota da API para Produtos
 [ApiController]
+[ApiConventionType(typeof(DefaultApiConventions))]
+[ApiVersion("1.0")]
 public class ProdutosController : ControllerBase
 {
     private readonly IUnitOfWork _uof;
@@ -61,7 +64,10 @@ public class ProdutosController : ControllerBase
 
         return ObterProdutos(produtos);
     }
-
+    /// <summary>
+    /// Retorna todos os produtos.
+    /// </summary>
+    /// <returns>Retorna uma lista de todos os produtos</returns>
     [HttpGet]
     [Authorize(Policy = "UserOnly")]
     public async Task<ActionResult<IEnumerable<ProdutoDTO>>> GetAsync()
@@ -89,6 +95,11 @@ public class ProdutosController : ControllerBase
         return await produtos;
      */
 
+    /// <summary>
+    /// Obtem um produto pelo seu ID.
+    /// </summary>
+    /// <param name="id">ID do produto</param>
+    /// <returns>Um objeto produto</returns>
     [HttpGet("{id}", Name = "ObterProduto")]
     public async Task<ActionResult<ProdutoDTO>> GetAsync(int id)
     {
